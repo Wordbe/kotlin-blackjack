@@ -36,8 +36,8 @@ class Running(
             return BlackJack(addedCards)
         }
 
-        if (score.isBurst()) {
-            return Burst(addedCards)
+        if (score.isBust()) {
+            return Bust(addedCards)
         }
 
         return Running(addedCards)
@@ -66,11 +66,11 @@ sealed class Finished(
     }
 
     override fun gameResult(other: State): GameResult {
-        if (this is Burst) {
+        if (this is Bust) {
             return GameResult.LOSE
         }
 
-        if (other is Burst) {
+        if (other is Bust) {
             return GameResult.WIN
         }
 
@@ -94,7 +94,7 @@ class Stay(
     override fun profitMultiple(): BigDecimal = BigDecimal(1)
 }
 
-class Burst(
+class Bust(
     cards: Cards,
 ) : Finished(cards) {
     override fun profitMultiple(): BigDecimal = BigDecimal(-1)

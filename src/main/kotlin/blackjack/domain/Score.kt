@@ -16,7 +16,7 @@ value class Score(
         return score - other.score
     }
 
-    fun isBurst(): Boolean {
+    fun isBust(): Boolean {
         return score > BLACKJACK_SCORE
     }
 

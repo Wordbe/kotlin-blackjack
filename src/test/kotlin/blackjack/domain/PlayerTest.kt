@@ -23,7 +23,7 @@ class PlayerTest : FunSpec({
         player.state.cards shouldBe cards + card
     }
 
-    test("카드를 더 받고(hit) 21 초과하면 burst 된다") {
+    test("카드를 더 받고(hit) 21 초과하면 Bust 된다") {
         val cards = Cards(
             Card.of(Denomination.KING, Suit.SPADES),
             Card.of(Denomination.JACK, Suit.SPADES),
@@ -33,7 +33,7 @@ class PlayerTest : FunSpec({
 
         player.hit(card)
 
-        player.state should instanceOf<Burst>()
+        player.state should instanceOf<Bust>()
         player.state.cards shouldBe cards + card
     }
 
@@ -102,12 +102,12 @@ class PlayerTest : FunSpec({
             ),
             StateProfit(
                 Stay(Cards(Card.of(Denomination.KING, Suit.SPADES), Card.of(Denomination.JACK, Suit.SPADES))),
-                Burst(Cards(Card.of(Denomination.KING, Suit.CLUBS), Card.of(Denomination.JACK, Suit.CLUBS), Card.of(Denomination.TWO, Suit.CLUBS))),
+                Bust(Cards(Card.of(Denomination.KING, Suit.CLUBS), Card.of(Denomination.JACK, Suit.CLUBS), Card.of(Denomination.TWO, Suit.CLUBS))),
                 Profit(BigDecimal(1000)),
             ),
             StateProfit(
-                Burst(Cards(Card.of(Denomination.KING, Suit.SPADES), Card.of(Denomination.JACK, Suit.SPADES))),
-                Burst(Cards(Card.of(Denomination.KING, Suit.CLUBS), Card.of(Denomination.JACK, Suit.CLUBS), Card.of(Denomination.TWO, Suit.CLUBS))),
+                Bust(Cards(Card.of(Denomination.KING, Suit.SPADES), Card.of(Denomination.JACK, Suit.SPADES))),
+                Bust(Cards(Card.of(Denomination.KING, Suit.CLUBS), Card.of(Denomination.JACK, Suit.CLUBS), Card.of(Denomination.TWO, Suit.CLUBS))),
                 Profit(BigDecimal(-1000)),
             ),
         ) { (playerState, dealerState, profit) ->
@@ -120,7 +120,7 @@ class PlayerTest : FunSpec({
 
     test("플레이어의 상태가 끝났는지 반환한다") {
         val cards = Cards(Card.of(Denomination.KING, Suit.CLUBS), Card.of(Denomination.JACK, Suit.CLUBS), Card.of(Denomination.TWO, Suit.CLUBS))
-        val player = player(state = Burst(cards))
+        val player = player(state = Bust(cards))
 
         player.isFinished() shouldBe true
     }

@@ -14,7 +14,7 @@ class Cards(
     fun calculateScore(): Score {
         var scoreSum: Score = cards.sumOf { it.denomination.maxScore() }
         for (i in 1..countAces()) {
-            if (!scoreSum.isBurst()) {
+            if (!scoreSum.isBust()) {
                 break
             }
             scoreSum = scoreSum + Denomination.ACE.score() - Denomination.ACE.maxScore()

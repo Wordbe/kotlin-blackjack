@@ -36,7 +36,7 @@ class RunningTest : FunSpec({
         state.cards shouldBe cards + card
     }
 
-    test("Running 은 hit 다음 보유한 카드의 점수가 21을 넘으면 Burst 를 반환한다") {
+    test("Running 은 hit 다음 보유한 카드의 점수가 21을 넘으면 Bust 를 반환한다") {
         val cards = Cards(
             Card.of(Denomination.TWO, Suit.SPADES),
             Card.of(Denomination.JACK, Suit.SPADES),
@@ -46,7 +46,7 @@ class RunningTest : FunSpec({
 
         val state = running.hit(card)
 
-        state should instanceOf<Burst>()
+        state should instanceOf<Bust>()
         state.cards shouldBe cards + card
     }
 
